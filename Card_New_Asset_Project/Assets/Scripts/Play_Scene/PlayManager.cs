@@ -14,6 +14,6 @@ public class PlayManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            SceneLoadManager.ChangeSceneTo(SceneLoadManager.SceneName.Result);
+            SceneLoadManager.ChangeSceneTo(SceneName.Result);
     }
 }

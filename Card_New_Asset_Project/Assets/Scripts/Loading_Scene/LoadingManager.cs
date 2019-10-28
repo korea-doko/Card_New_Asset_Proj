@@ -13,7 +13,7 @@ public class LoadingManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("a");
-            SceneLoadManager.ChangeSceneTo(SceneLoadManager.SceneName.Lobby);
+            SceneLoadManager.ChangeSceneTo(SceneName.Lobby);
 
             
         }

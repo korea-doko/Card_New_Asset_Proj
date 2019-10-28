@@ -14,6 +14,6 @@ public class LobbyManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            SceneLoadManager.ChangeSceneTo(SceneLoadManager.SceneName.Play);
+            SceneLoadManager.ChangeSceneTo(SceneName.Play);
     }
 }

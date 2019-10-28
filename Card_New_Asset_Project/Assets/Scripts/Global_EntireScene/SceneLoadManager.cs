@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum SceneName
 {
@@ -10,16 +11,16 @@ public enum SceneName
     Result
 }
 
-public class SceneManager : MonoBehaviour
+public class SceneLoadManager : MonoBehaviour
 {
 
     void Start()
     {
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this.gameObject);
     }    
 
-    public static void ChangeSceneTo(SceneName sceneName)
+    public static void ChangeSceneTo(SceneName _sceneName)
     {
-
+        SceneManager.LoadScene((int)_sceneName);
     }
 }
