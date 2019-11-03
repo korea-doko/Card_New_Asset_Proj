@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
 {
     public const float clickCardTimeThreshHold = 1.0f;
     public const float dragDistanceThreshHold = 12.0f;
+    public const float dragUnitVectorThreshHold = 0.5f;
     // 카드 클릭 시간 쓰레쉬홀드
     // 입출력 드래그 거리 쓰레쉬홀드
 
@@ -19,7 +20,7 @@ public class InputManager : MonoBehaviour
     // 카드 클릭 확인
 
 
-    public Vector3 dragStartPos;
+    public Vector3 clickStartPos;
     public Card clickedCard;
 
     
@@ -27,7 +28,7 @@ public class InputManager : MonoBehaviour
     {           
         clickCardCurTime = 0.0f;
         isCardClicked = false;
-        dragStartPos = Vector3.zero;
+        clickStartPos = Vector3.zero;
         clickedCard = null;
     }
 
@@ -38,8 +39,8 @@ public class InputManager : MonoBehaviour
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
-                dragStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                RaycastHit2D raycastHit2D = Physics2D.Raycast(dragStartPos, Vector2.zero);
+                clickStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D raycastHit2D = Physics2D.Raycast(clickStartPos, Vector2.zero);
 
                 if(raycastHit2D)
                 {
@@ -65,15 +66,83 @@ public class InputManager : MonoBehaviour
 
         if( Input.GetMouseButtonUp(0))
         {
-            Vector3 clickEndPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);            
-            float clickedDistance = Mathf.Abs(Vector3.Distance(clickEndPos, dragStartPos));
+            Vector3 clickEndPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            Debug.Log("드래그 거리 : " + clickedDistance.ToString());
-
-            if( clickedDistance > dragDistanceThreshHold)
+            Vector3 clickVector = clickEndPos - clickStartPos;
+            
+            if( clickVector.magnitude > dragDistanceThreshHold)
             {
-                // 움직인 거리가 크게 움직였기 때문에 상하좌우 입출력판단
-                Debug.Log("충분히 움직여서 카드입출력으로 처리");
+                Vector3 clickUnitVector = clickVector.normalized;
+
+                Debug.Log("충분히 움직여서 카드입출력으로 처리");      
+                
+                if( clickUnitVector.x >= 0 )
+                {
+                    if (clickUnitVector.y >= 0)
+                    {
+                        // 1사분면
+                        if (Mathf.Abs(clickUnitVector.x) > Mathf.Abs(clickUnitVector.y))
+                        {
+                            Debug.Log("동");
+                        }
+                        else
+                        {
+                            Debug.Log("북");
+                        }
+                    }
+                    else
+                    {
+                        // 4사분면
+
+                        if (Mathf.Abs(clickUnitVector.x) > Mathf.Abs(clickUnitVector.y))
+                        {
+                            // 오른쪽이동
+
+                            Debug.Log("동");
+                        }
+                        else
+                        {
+                            // 아래로 이동
+                            Debug.Log("남");
+                        }
+                    }
+                }
+                else
+                {
+                    if (clickUnitVector.y >= 0)
+                    {
+                        // 2사분면
+                        if (Mathf.Abs(clickUnitVector.x) > Mathf.Abs(clickUnitVector.y))
+                        {
+                            // 왼쪽이동
+                            Debug.Log("서");
+                        }
+                        else
+                        {
+                            // 위로 이동
+
+                            Debug.Log("북");
+                        }
+                    }
+                    else
+                    {
+                        // 3사분면
+
+                        if (Mathf.Abs(clickUnitVector.x) > Mathf.Abs(clickUnitVector.y))
+                        {
+                            // 왼쪽이동
+
+                            Debug.Log("서");
+                        }
+                        else
+                        {
+                            // 아래로 이동
+
+                            Debug.Log("남");
+                        }
+                    }
+                }
+
 
 
             }
@@ -110,23 +179,13 @@ public class InputManager : MonoBehaviour
                 else
                 {
                     Debug.Log("카드 충분히 오래 누르지 않음");
-                }
-
-                ClearClickCardVariables();
+                }     
             }
+
+            isCardClicked = false;
+            clickCardCurTime = 0.0f;
+            clickedCard = null;
         }
     }
+}   
     
-
-    private void ClearClickCardVariables()
-    {
-        isCardClicked = false;
-        clickCardCurTime = 0.0f;
-        clickedCard = null;
-    }
-
-    private void ClearDragVariables()
-    {
-
-    }
-}
