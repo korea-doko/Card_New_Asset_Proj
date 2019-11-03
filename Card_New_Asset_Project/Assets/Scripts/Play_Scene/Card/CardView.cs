@@ -27,6 +27,7 @@ public class CardView : MonoBehaviour
         for(int i = 0; i < 9;i++)
         {
             Card card = ((GameObject)Instantiate(prefab)).GetComponent<Card>();
+            card.Init(i);
 
             Transform pos = cardPosList[i];
 
