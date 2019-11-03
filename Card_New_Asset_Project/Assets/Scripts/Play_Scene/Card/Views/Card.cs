@@ -12,34 +12,28 @@ public class Card : MonoBehaviour
     public void Init(int _id)
     {
         this.id = _id;
+        Hide();
     }
+    public void Hide()
+    {
+        this.gameObject.SetActive(false);
+    }
+    public void Show()
+    {
+        this.gameObject.SetActive(true);
+    }
+    public static bool operator==(Card _card1,Card _card2)
+    {
+        if (_card1.id == _card2.id)
+            return true;
 
-    //public void Init(float worldWidth, float worldHeight)
-    //{
-    //    spr = this.GetComponent<SpriteRenderer>();
+        return false;
+    }
+    public static bool operator!=(Card _card1,Card _card2)
+    {
+        if (_card1.id != _card2.id)
+            return true;
 
-    //    ChangeScaleToScreen(worldWidth, worldHeight);
-    //}
-    //public void ChangeScale(float width, float height)
-    //{       
-    //    spr.transform.localScale = new 
-    //        Vector3
-    //        (
-    //            spr.transform.localScale.x * width, 
-    //            spr.transform.localScale.y * height,
-    //            1
-    //        );
-    //}
-    //private void ChangeScaleToScreen(float width, float height)
-    //{
-    //    this.transform.localScale =
-    //        new Vector3
-    //        (
-    //            width / spr.sprite.bounds.size.x,
-    //            height / spr.sprite.bounds.size.y,
-    //            1
-    //        );
-    //}
-
-    
+        return false;
+    }
 }

@@ -389,15 +389,15 @@ Transform:
   m_LocalPosition: {x: -25.379997, y: 25.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1288806971}
-  - {fileID: 1968744660}
-  - {fileID: 1805501499}
-  - {fileID: 1899670991}
-  - {fileID: 1009686281}
-  - {fileID: 1408394542}
   - {fileID: 647589712}
   - {fileID: 444809553}
   - {fileID: 1321889075}
+  - {fileID: 1899670991}
+  - {fileID: 1009686281}
+  - {fileID: 1408394542}
+  - {fileID: 1288806971}
+  - {fileID: 1968744660}
+  - {fileID: 1805501499}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 444809553}
   - component: {fileID: 444809552}
   m_Layer: 0
-  m_Name: Card (7)
+  m_Name: Card (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -712,7 +712,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 328732585}
-  m_RootOrder: 7
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &571956768
 GameObject:
@@ -919,7 +919,7 @@ GameObject:
   - component: {fileID: 647589712}
   - component: {fileID: 647589711}
   m_Layer: 0
-  m_Name: Card (6)
+  m_Name: Card (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -985,7 +985,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 328732585}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &689914572
 GameObject:
@@ -1108,6 +1108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 1146778227}
   view: {fileID: 1622817811}
+  cardIndexRange: {x: 0, y: 0}
 --- !u!1 &881204917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,6 +1488,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 406563d69ae283c4cb409267aa887f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curX: 0
+  curY: 0
 --- !u!1 &1288806969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,7 +1501,7 @@ GameObject:
   - component: {fileID: 1288806971}
   - component: {fileID: 1288806970}
   m_Layer: 0
-  m_Name: Card
+  m_Name: Card (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1564,7 +1567,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 328732585}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1321889073
 GameObject:
@@ -1577,7 +1580,7 @@ GameObject:
   - component: {fileID: 1321889075}
   - component: {fileID: 1321889074}
   m_Layer: 0
-  m_Name: Card (8)
+  m_Name: Card (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1643,7 +1646,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 328732585}
-  m_RootOrder: 8
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1408394540
 GameObject:
@@ -1767,23 +1770,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef64e8ab13a8cb4c914d4e9c554f504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardList: []
-  cardPoolList: []
-  worldWidth: 0
-  worldHeight: 0
-  widthMargin: 0
-  cardWidth: 0
-  cardHeight: 0
+  cardPool: []
   cardPosList:
-  - {fileID: 1288806971}
-  - {fileID: 1968744660}
-  - {fileID: 1805501499}
-  - {fileID: 1899670991}
-  - {fileID: 1009686281}
-  - {fileID: 1408394542}
   - {fileID: 647589712}
   - {fileID: 444809553}
   - {fileID: 1321889075}
+  - {fileID: 1899670991}
+  - {fileID: 1009686281}
+  - {fileID: 1408394542}
+  - {fileID: 1288806971}
+  - {fileID: 1968744660}
+  - {fileID: 1805501499}
 --- !u!1 &1676016038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1899,7 +1896,7 @@ GameObject:
   - component: {fileID: 1805501499}
   - component: {fileID: 1805501498}
   m_Layer: 0
-  m_Name: Card (2)
+  m_Name: Card (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1965,7 +1962,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 328732585}
-  m_RootOrder: 2
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1817737955
 GameObject:
@@ -2072,10 +2069,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b39e610fbf8fa4090db034dea75b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickCardCurTime: 0
+  clickingCardTime: 0
   isCardClicked: 0
-  dragStartPos: {x: 0, y: 0, z: 0}
   clickedCard: {fileID: 0}
+  dragBeginScreenPos: {x: 0, y: 0, z: 0}
 --- !u!4 &1894007517
 Transform:
   m_ObjectHideFlags: 0
@@ -2254,7 +2251,7 @@ GameObject:
   - component: {fileID: 1968744660}
   - component: {fileID: 1968744659}
   m_Layer: 0
-  m_Name: Card (1)
+  m_Name: Card (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2320,7 +2317,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 328732585}
-  m_RootOrder: 1
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1971148679
 GameObject:
