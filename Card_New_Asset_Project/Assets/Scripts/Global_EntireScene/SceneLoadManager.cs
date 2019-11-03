@@ -21,6 +21,6 @@ public class SceneLoadManager : MonoBehaviour
 
     public static void ChangeSceneTo(SceneName _sceneName)
     {
-        SceneManager.LoadScene((int)_sceneName);
+        SceneManager.LoadScene(_sceneName.ToString());
     }
 }

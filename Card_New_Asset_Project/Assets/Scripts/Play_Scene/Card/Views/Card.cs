@@ -13,6 +13,7 @@ public class Card : MonoBehaviour
 
         ChangeScaleToScreen(worldWidth, worldHeight);
     }
+
     public void ChangeScale(float width, float height)
     {       
         spr.transform.localScale = new 

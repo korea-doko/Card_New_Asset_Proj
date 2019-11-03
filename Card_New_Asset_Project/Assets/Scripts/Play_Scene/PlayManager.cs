@@ -13,16 +13,16 @@ public class PlayManager : MonoBehaviour
     void Start()
     {
 
-        float worldHeight = Camera.main.orthographicSize * 2.0f;
-        float worldWidth = worldHeight / Screen.height * Screen.width;
+        //float worldHeight = Camera.main.orthographicSize * 2.0f;
+        //float worldWidth = worldHeight / Screen.height * Screen.width;
 
-        bgSpr.transform.localScale =
-            new Vector3
-            (
-                worldWidth / bgSpr.sprite.bounds.size.x,
-                worldHeight / bgSpr.sprite.bounds.size.y,
-                1
-            );
+        //bgSpr.transform.localScale =
+        //    new Vector3
+        //    (
+        //        worldWidth / bgSpr.sprite.bounds.size.x,
+        //        worldHeight / bgSpr.sprite.bounds.size.y,
+        //        1
+        //    );
 
     }
 

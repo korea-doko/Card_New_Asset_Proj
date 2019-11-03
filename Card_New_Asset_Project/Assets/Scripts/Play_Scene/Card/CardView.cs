@@ -16,46 +16,25 @@ public class CardView : MonoBehaviour
 
     public float cardWidth;
     public float cardHeight;
-
+    
+    //
+    public List<Transform> cardPosList;
 
     public void Init(CardModel model)
     {
-        cardList = new List<Card>();
+        GameObject prefab = Resources.Load("Prefabs/Card") as GameObject;
 
-        worldHeight = Camera.main.orthographicSize * 2.0f;
-        worldWidth = worldHeight / Screen.height * Screen.width;
+        for(int i = 0; i < 9;i++)
+        {
+            Card card = ((GameObject)Instantiate(prefab)).GetComponent<Card>();
 
-        //InitCardPosAndSize();
+            Transform pos = cardPosList[i];
 
+            card.transform.position = pos.position;
+        }
 
-        InitCardPool();              
     }
 
   
-    private void InitCardPosAndSize()
-    {
-        //cardWidth = worldWidth * 0.33f;
-        //cardHeight = worldHeight * 0.33f;
-    }
 
-    private void InitCardPool()
-    {
-        cardPoolList = new List<Card>();
-
-
-        GameObject cardPrefab = Resources.Load("Prefabs/Card") as GameObject;
-
-   
-
-        for (int i = 0; i < 12; i++)
-        {
-            Card card = ((GameObject)Instantiate(cardPrefab)).GetComponent<Card>();
-
-            card.Init(worldWidth,worldHeight);
-
-            card.ChangeScale(0.33f, 0.33f);
-
-            cardPoolList.Add(card);
-        }
-    }
 }
