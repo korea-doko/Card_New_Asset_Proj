@@ -13,8 +13,10 @@ public class CardView : MonoBehaviour
 
     public void Init(CardModel model)
     {
+        cardAry = new Card[3, 3];
+
         MakeCardPool();
-        InitCards();
+       // InitCards();
     }
 
     public void SetCard(Card _card, int _x, int _y)

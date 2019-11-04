@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using DG.Tweening.Core;
 
 
+/// <summary>
+/// 처음 초기화 (InitSqeuence)만 Tweener 반환으로 처리하고
+/// 나머지는 코드를 풀어쓰도록하자. 
+/// 이 부분은 tweener 쪽이 약간 모자라서 그럴 수 있음
+/// </summary>
 public class CardManager : MonoBehaviour
 {
     public enum EMoveDir
@@ -43,8 +49,21 @@ public class CardManager : MonoBehaviour
         cardMoveSequence = DOTween.Sequence();
         isSequencePlaying = false;
         sequenceCheckTime = 0.0f;
-    }
 
+
+        Sequence initSequence = DOTween.Sequence();
+
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                Tweener initTweener = MakeCardAtTweener(x, y);
+                initSequence.Join(initTweener);
+            }
+        }
+
+        initSequence.Play();       
+    }
     private void Update()
     {
         if( isSequencePlaying )
@@ -56,14 +75,14 @@ public class CardManager : MonoBehaviour
                 isSequencePlaying = false;
                 sequenceCheckTime = 0.0f;
             }
-        }
+        }        
     }
 
     public void MovePlayer(EMoveDir _dir)
     {
         if (!IsMovable(_dir))
             return;
-
+        
         if (isSequencePlaying)
             return;
 
@@ -127,8 +146,7 @@ public class CardManager : MonoBehaviour
                 break;
         }
 
-       
-
+        
         cardMoveSequence.Play();
         isSequencePlaying = true;
         // 시퀀스 플레이
@@ -175,26 +193,29 @@ public class CardManager : MonoBehaviour
         
         curCard.transform.DOMove(dest.position, 1.0f);        
     }
-    private void MakeCardAt(int _x, int _y)
+
+   
+    private Tweener MakeCardAtTweener(int _x, int _y)
     {
         Card card = view.GetCardFromPool();
-
-        Transform dest = GetCardPos(_x,_y);
+        Transform dest = GetCardPos(_x, _y);
 
         card.transform.position = dest.position;
         card.transform.localScale = Vector3.zero;
         card.Show();
 
-        card.transform.DOScale(Vector3.one, 1.0f).
-            OnComplete(
+
+        return card.transform.DOScale(Vector3.one, animationTime).Pause()
+        .OnComplete
+        (
             () =>
-            {             
-                view.cardAry[model.curX, model.curY] = card;
-            });
-
-        
+            {
+                view.cardAry[_x, _y] = card;
+            }
+        );                               
     }
-
+ 
+    
 
 
     private void ChangeCurPosBy(EMoveDir _dir)
@@ -225,7 +246,6 @@ public class CardManager : MonoBehaviour
             return true;        
         return false;
     }
-
     private bool IsMovable(EMoveDir _dir)
     {
         switch (_dir)
@@ -298,4 +318,5 @@ public class CardManager : MonoBehaviour
         return view.GetCardPos(_x, _y);
     }
     
+
 }
