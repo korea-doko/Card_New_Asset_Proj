@@ -18,9 +18,13 @@ public class CardManager : MonoBehaviour
 
     public CardModel model;
     public CardView view;
+
     public readonly Vector2Int cardIndexRange = new Vector2Int(0, 2);
+    public readonly float animationTime = 1.0f;
 
     public Sequence cardMoveSequence;
+    public bool isSequencePlaying;
+    public float sequenceCheckTime;
 
     public static CardManager Inst
     {
@@ -37,11 +41,30 @@ public class CardManager : MonoBehaviour
         view.Init(model);
 
         cardMoveSequence = DOTween.Sequence();
+        isSequencePlaying = false;
+        sequenceCheckTime = 0.0f;
     }
-    
+
+    private void Update()
+    {
+        if( isSequencePlaying )
+        {
+            sequenceCheckTime += Time.deltaTime;
+
+            if ( sequenceCheckTime > animationTime)
+            {
+                isSequencePlaying = false;
+                sequenceCheckTime = 0.0f;
+            }
+        }
+    }
+
     public void MovePlayer(EMoveDir _dir)
     {
         if (!IsMovable(_dir))
+            return;
+
+        if (isSequencePlaying)
             return;
 
         /*
@@ -59,18 +82,18 @@ public class CardManager : MonoBehaviour
 
         cardMoveSequence.Append
         (
-                destCard.transform.DOScale(Vector3.zero, 1.0f)      
+                destCard.transform.DOScale(Vector3.zero, animationTime)      
         );
-
+        // 목적지에 있는 카드 제거
 
         Card curCard = GetCard(model.curX, model.curY);
         Transform dest = GetCardPosByDir(model.curX, model.curY, _dir);
 
         cardMoveSequence.Join
         (
-            curCard.transform.DOMove(dest.position, 1.0f)        
+            curCard.transform.DOMove(dest.position, animationTime)        
         );
-
+        // 현재 카드 이동
 
 
 
@@ -82,8 +105,9 @@ public class CardManager : MonoBehaviour
 
         cardMoveSequence.Join
         (
-            newCard.transform.DOScale(Vector3.one, 1.0f)        
+            newCard.transform.DOScale(Vector3.one, animationTime)        
         );
+        // 삭제 및 이동으로 생긴 빈 공간에 카드 생성
 
         switch (_dir)
         {
@@ -103,48 +127,15 @@ public class CardManager : MonoBehaviour
                 break;
         }
 
-        cardMoveSequence.Play();
+       
 
+        cardMoveSequence.Play();
+        isSequencePlaying = true;
+        // 시퀀스 플레이
 
         view.cardAry[model.curX, model.curY] = newCard;
         ChangeCurPosBy(_dir);
-        view.cardAry[model.curX, model.curY] = curCard;
-
-
-        //cardMoveSequence            
-        //.AppendCallback
-        //(
-        //    () =>
-        //    {
-        //        Debug.Log("a");
-        //        switch (_dir)
-        //        {
-        //            case EMoveDir.East:
-        //                view.HideCardAt(model.curX + 1, model.curY);
-        //                break;
-        //            case EMoveDir.West:
-        //                view.HideCardAt(model.curX - 1, model.curY);
-        //                break;
-        //            case EMoveDir.South:
-        //                view.HideCardAt(model.curX, model.curY - 1);
-        //                break;
-        //            case EMoveDir.North:
-        //                view.HideCardAt(model.curX, model.curY + 1);
-        //                break;
-        //            default:
-        //                break;
-        //        }
-                
-
-        //        view.cardAry[model.curX, model.curY] = newCard;
-
-        //        ChangeCurPosBy(_dir);
-
-        //        view.cardAry[model.curX, model.curY] = curCard;
-        //    }
-        //);
-
-             
+        view.cardAry[model.curX, model.curY] = curCard;        
     }
 
     private void HideCardAt(EMoveDir _dir)
