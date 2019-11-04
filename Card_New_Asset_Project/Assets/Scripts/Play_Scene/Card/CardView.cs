@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CardView : MonoBehaviour
 {
@@ -16,34 +17,51 @@ public class CardView : MonoBehaviour
         InitCards();
     }
 
-    private void MakeCardPool()
+    public void SetCard(Card _card, int _x, int _y)
     {
-        GameObject prefab = Resources.Load("Prefabs/Card") as GameObject;
+        Card originCard = cardAry[_x, _y];
+        cardPool.Add(originCard);
 
-        cardPool = new List<Card>();
-
-        for (int i = 0; i < 20 ; i++)
-        {
-            Card card = ((GameObject)Instantiate(prefab)).GetComponent<Card>();
-            card.transform.SetParent(this.transform);
-            card.Init(i);
-
-            cardPool.Add(card);
-        }
+        cardAry[_x, _y] = _card;
     }
-
     public Card GetCard(int _x, int _y)
     {
         return cardAry[_x, _y];
     }
+    public Transform GetCardPos(int x, int y)
+    {
+        return cardPosList[3 * y + x];
+    }
+    public void HideCardAt(int _x, int _y)
+    {        
+        Card card = cardAry[_x, _y];
+        card.Hide();
+
+        cardAry[_x, _y] = null;
+        cardPool.Add(card);
+    }
+    public Card GetCardFromPool()
+    {
+        if (cardPosList.Count <= 0)
+            throw new Exception();
+
+        Card card = cardPool[0];
+        cardPool.RemoveAt(0);
+
+        return card;
+    }
+
+
+
+
 
     private void InitCards()
     {
-        cardAry = new Card[3, 3]; 
+        cardAry = new Card[3, 3];
 
-        for(int y = 0; y< 3 ; y++)
+        for (int y = 0; y < 3; y++)
         {
-            for(int x = 0; x <3; x++)
+            for (int x = 0; x < 3; x++)
             {
                 Card card = GetCardFromPool();
 
@@ -55,14 +73,23 @@ public class CardView : MonoBehaviour
             }
         }
     }
-    private Card GetCardFromPool()
+    private void MakeCardPool()
     {
-        if (cardPosList.Count <= 0)
-            throw new Exception();
+        GameObject prefab = Resources.Load("Prefabs/Card") as GameObject;
 
-        Card card = cardPool[0];
-        cardPool.RemoveAt(0);
+        cardPool = new List<Card>();
 
-        return card;
-    } 
+        for (int i = 0; i < 20; i++)
+        {
+            Card card = ((GameObject)Instantiate(prefab)).GetComponent<Card>();
+            card.transform.SetParent(this.transform);
+            card.Init(i);
+
+            cardPool.Add(card);
+        }
+    }
+
+    
+
+    
 }

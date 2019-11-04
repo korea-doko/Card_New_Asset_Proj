@@ -36,4 +36,5 @@ public class Card : MonoBehaviour
 
         return false;
     }
+
 }
