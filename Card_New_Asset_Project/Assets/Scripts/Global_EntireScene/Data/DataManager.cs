@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    public List<RawCharacterData> rawCharacterDataList;
+    
+    public static List<RawCharacterData> rawCharacterDataList;
     
     void Start()
     {
@@ -15,11 +16,11 @@ public class DataManager : MonoBehaviour
 
     private void LoadRawCharacterData()
     {
-        this.rawCharacterDataList = new List<RawCharacterData>();
+        rawCharacterDataList = new List<RawCharacterData>();
 
         RawCharacterData[] rcds = Resources.LoadAll<RawCharacterData>("SOs/Characters");
 
         foreach (RawCharacterData rcd in rcds)
-            this.rawCharacterDataList.Add(rcd);
+            rawCharacterDataList.Add(rcd);
     }
 }

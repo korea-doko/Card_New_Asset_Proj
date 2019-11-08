@@ -38,11 +38,34 @@ public class CharacterManager : MonoBehaviour
 
     private void View_OnPrevButtonClicked(object sender, EventArgs e)
     {
+        if (model.curSeenCharacterIndex - 1 < 0)
+            model.curSeenCharacterIndex = 0;
+        else
+            model.curSeenCharacterIndex--;
 
+        PageManager.Inst.TurnOverLeftToRight
+            (
+                () =>
+                {
+                    view.ShowCharacterPanel(model);
+                }
+            );
     }
 
     private void View_OnNextButtonClicked(object sender, EventArgs e)
     {
+        if (model.curSeenCharacterIndex + 1 >= DataManager.rawCharacterDataList.Count)
+            model.curSeenCharacterIndex = 0;
+        else
+            model.curSeenCharacterIndex++;
+
+        PageManager.Inst.TurnOverRightToLeft
+            (
+                () => 
+                {
+                    view.ShowCharacterPanel(model);
+                }
+            );
     }
 
     private void View_OnBackButtonClicked(object sender, EventArgs e)
@@ -55,6 +78,6 @@ public class CharacterManager : MonoBehaviour
 
     public void ShowCharacterPanel()
     {
-        view.ShowCharacterPanel();
+        view.ShowCharacterPanel(model);
     }
 }

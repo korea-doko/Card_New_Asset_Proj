@@ -28,6 +28,8 @@ public class LobbyManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        ShowMenuPanel();
+
         playButton.onClick.AddListener(OnPlayButtonClicked);
         exitButton.onClick.AddListener(OnExitButtonClicked);
     }

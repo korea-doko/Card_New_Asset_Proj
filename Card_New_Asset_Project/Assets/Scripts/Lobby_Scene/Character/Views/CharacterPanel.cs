@@ -15,8 +15,6 @@ public class CharacterPanel : MonoBehaviour
 
     public Image characterImage;
 
-    
-
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descText;
 
@@ -24,8 +22,8 @@ public class CharacterPanel : MonoBehaviour
     public Button prevButton;
     public Button selectButton;
     public Button backButton;
-    
 
+    
     public void Init()
     {
         nextButton.onClick.AddListener(ClickNextButton);
@@ -33,13 +31,26 @@ public class CharacterPanel : MonoBehaviour
         selectButton.onClick.AddListener(ClickSelectButton);
         backButton.onClick.AddListener(ClickBackButton);
 
+        
         Hide();
     }
 
 
-    public void Show()
+    public void Show(CharacterModel model)
     {
+        List<RawCharacterData> rawCharacters = DataManager.rawCharacterDataList;
+
+        if (rawCharacters.Count == 0)
+            throw new Exception();
+
+        RawCharacterData data = rawCharacters[model.curSeenCharacterIndex];
+
+        this.characterImage.sprite = data.charImage;
+        this.nameText.text = data.charName;
+        this.descText.text = data.charDesc;
+
         this.gameObject.SetActive(true);
+
     }
     public void Hide()
     {

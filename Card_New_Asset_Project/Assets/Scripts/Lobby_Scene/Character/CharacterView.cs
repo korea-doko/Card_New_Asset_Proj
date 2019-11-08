@@ -23,9 +23,9 @@ public class CharacterView : MonoBehaviour
     }
 
     
-    public void ShowCharacterPanel()
+    public void ShowCharacterPanel(CharacterModel model)
     {
-        characterPanel.Show();
+        characterPanel.Show(model);
     }
 
     private void CharacterPanel_OnSelectButtonClicked(object sender, EventArgs e)

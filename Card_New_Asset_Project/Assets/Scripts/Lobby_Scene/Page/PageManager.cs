@@ -30,7 +30,7 @@ public class PageManager : MonoBehaviour
         model.Init();
         view.Init(model);
 
-        turnOverTime = 0.5f;
+        turnOverTime = 0.3f;
     }
 
     private void Update()
