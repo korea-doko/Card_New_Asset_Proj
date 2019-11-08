@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class PageManager : MonoBehaviour
 {
     private static PageManager inst;
 
-    public PageModel model;
-    public PageView view;
+    [SerializeField] private PageModel model;
+    [SerializeField] private PageView view;
 
 
-    public float turnOverTime;                  // 페이지 넘기는 전체 시간은 turnOverTime * 2
+    [SerializeField] private float turnOverTime;                  // 페이지 넘기는 전체 시간은 turnOverTime * 2
  
 
 
@@ -32,7 +33,7 @@ public class PageManager : MonoBehaviour
         turnOverTime = 0.5f;
     }
 
-    public void Update()
+    private void Update()
     {
         if( Input.GetKeyDown(KeyCode.R))
             TurnOverRightToLeft();
@@ -41,7 +42,7 @@ public class PageManager : MonoBehaviour
             TurnOverLeftToRight();
     }
 
-    private void TurnOverLeftToRight()
+    public void TurnOverLeftToRight( Action _atTheEndAction = null )
     {
         /*
         *  왼쪽에서 오른쪽으로 페이지가 넘어가는 애니메이션
@@ -90,10 +91,21 @@ public class PageManager : MonoBehaviour
             );
         seq.Append(rightPageTweener);
 
+        if( _atTheEndAction != null)
+        {
+            seq.OnComplete
+            (
+                () => 
+                {
+                    _atTheEndAction();
+                }
+            );
+        }
+
         seq.Play();
     }
 
-    private void TurnOverRightToLeft()
+    public void TurnOverRightToLeft( Action _atTheEndAction =null )
     {
 
         /*
@@ -137,6 +149,17 @@ public class PageManager : MonoBehaviour
                 }
             );
         seq.Append(leftPageTweener);
+
+        if( _atTheEndAction != null)
+        {
+            seq.OnComplete
+            (
+                () =>
+                {
+                    _atTheEndAction();
+                }
+            );
+        }
 
         seq.Play();
 
