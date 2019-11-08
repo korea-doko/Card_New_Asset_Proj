@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviour
 {
+
+
+
     public Button playButton;
     public Button exitButton;
 
@@ -31,4 +34,6 @@ public class LobbyManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             SceneLoadManager.ChangeSceneTo(SceneName.Play);
     }
+
+    
 }

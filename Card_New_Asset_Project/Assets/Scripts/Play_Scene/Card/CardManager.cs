@@ -317,6 +317,5 @@ public class CardManager : MonoBehaviour
     {
         return view.GetCardPos(_x, _y);
     }
-    
-
+   
 }
