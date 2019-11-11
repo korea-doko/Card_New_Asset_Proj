@@ -80,7 +80,7 @@ public class InputManager : MonoBehaviour
                         // 카드에 맞았다. ( 게임에서 콜라이더 카드만 있음 )
                         Card card = raycastHit2D.collider.GetComponent<Card>();
 
-                        if (card == clickedCard)
+                        if (card.id == clickedCard.id)
                         {
                             Debug.Log("이 카드의 정보를 보여준다");
                         }

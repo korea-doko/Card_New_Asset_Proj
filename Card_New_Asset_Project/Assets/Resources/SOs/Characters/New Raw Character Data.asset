@@ -20,3 +20,4 @@ MonoBehaviour:
   maxLife: 30
   maxEnergy: 3
   maxCardSlots: 5
+  maxInventory: 3

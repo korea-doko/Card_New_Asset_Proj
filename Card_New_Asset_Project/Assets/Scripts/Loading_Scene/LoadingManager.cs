@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class LoadingManager : MonoBehaviour
 {
-    
-
+   
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("a");
-            SceneLoadManager.ChangeSceneTo(SceneName.Lobby);
-
-            
+        {        
+            SceneLoadManager.ChangeSceneTo(SceneName.Lobby);            
         }
     }
 }

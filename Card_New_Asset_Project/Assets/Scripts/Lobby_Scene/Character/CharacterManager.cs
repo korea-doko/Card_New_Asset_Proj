@@ -19,7 +19,7 @@ public class CharacterManager : MonoBehaviour
     {
         inst = this;
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         model.Init();
@@ -33,13 +33,14 @@ public class CharacterManager : MonoBehaviour
 
     private void View_OnSelectButtonClicked(object sender, EventArgs e)
     {
-
+        Debug.Log("Play");
     }
 
     private void View_OnPrevButtonClicked(object sender, EventArgs e)
     {
         if (model.curSeenCharacterIndex - 1 < 0)
-            model.curSeenCharacterIndex = 0;
+            model.curSeenCharacterIndex = DataManager.Inst.rawCharacterDataList.Count
+                - 1;
         else
             model.curSeenCharacterIndex--;
 
@@ -54,7 +55,7 @@ public class CharacterManager : MonoBehaviour
 
     private void View_OnNextButtonClicked(object sender, EventArgs e)
     {
-        if (model.curSeenCharacterIndex + 1 >= DataManager.rawCharacterDataList.Count)
+        if (model.curSeenCharacterIndex + 1 >= DataManager.Inst.rawCharacterDataList.Count)
             model.curSeenCharacterIndex = 0;
         else
             model.curSeenCharacterIndex++;

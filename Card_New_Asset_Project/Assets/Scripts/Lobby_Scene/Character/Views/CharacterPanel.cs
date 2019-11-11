@@ -38,7 +38,7 @@ public class CharacterPanel : MonoBehaviour
 
     public void Show(CharacterModel model)
     {
-        List<RawCharacterData> rawCharacters = DataManager.rawCharacterDataList;
+        List<RawCharacterData> rawCharacters = DataManager.Inst.rawCharacterDataList;
 
         if (rawCharacters.Count == 0)
             throw new Exception();

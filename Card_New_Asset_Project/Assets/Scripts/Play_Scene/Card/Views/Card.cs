@@ -22,19 +22,7 @@ public class Card : MonoBehaviour
     {
         this.gameObject.SetActive(true);
     }
-    public static bool operator==(Card _card1,Card _card2)
-    {
-        if (_card1.id == _card2.id)
-            return true;
 
-        return false;
-    }
-    public static bool operator!=(Card _card1,Card _card2)
-    {
-        if (_card1.id != _card2.id)
-            return true;
-
-        return false;
-    }
+    
 
 }
