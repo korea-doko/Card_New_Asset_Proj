@@ -5,20 +5,8 @@ using UnityEngine;
 
 public class PlayerView : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Init(PlayerModel model)
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    internal void Init(PlayerModel model)
-    {
-        throw new NotImplementedException();
     }
 }

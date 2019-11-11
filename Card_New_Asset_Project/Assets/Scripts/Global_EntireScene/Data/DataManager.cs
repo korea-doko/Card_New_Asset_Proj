@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    [SerializeField] public List<RawCharacterData> rawCharacterDataList;
-    [SerializeField] public List<RawItemData> rawItemDataList;
+    [SerializeField] public LoadDataModel loadDataModel;
+    [SerializeField] public PassDataModel passDataModel;
 
     private static DataManager inst;
     public DataManager()
@@ -24,26 +24,7 @@ public class DataManager : MonoBehaviour
     {
         DontDestroyOnLoad(this);
 
-        LoadRawCharacterData();
-        LoadRawItemData();
-    }   
-
-    private void LoadRawCharacterData()
-    {
-        rawCharacterDataList = new List<RawCharacterData>();
-
-        RawCharacterData[] rcds = Resources.LoadAll<RawCharacterData>("SOs/Characters");
-
-        foreach (RawCharacterData rcd in rcds)
-            rawCharacterDataList.Add(rcd);
-    }
-    private void LoadRawItemData()
-    {
-        rawItemDataList = new List<RawItemData>();
-
-        RawItemData[] rids = Resources.LoadAll<RawItemData>("SOs/Items");
-
-        foreach (RawItemData rid in rids)
-            rawItemDataList.Add(rid);
+        loadDataModel.Init();
+        passDataModel.Init();
     }
 }
